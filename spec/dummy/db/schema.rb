@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815132628) do
+ActiveRecord::Schema.define(version: 20160822104121) do
 
   create_table "shopping_cart_addresses", force: :cascade do |t|
     t.string   "first_name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160815132628) do
     t.string   "state"
     t.float    "total_price"
     t.datetime "completed_date"
+    t.string   "user_type"
     t.integer  "user_id"
     t.integer  "billing_address_id"
     t.integer  "shipping_address_id"
@@ -78,7 +79,24 @@ ActiveRecord::Schema.define(version: 20160815132628) do
     t.index ["coupon_id"], name: "index_shopping_cart_orders_on_coupon_id"
     t.index ["delivery_id"], name: "index_shopping_cart_orders_on_delivery_id"
     t.index ["shipping_address_id"], name: "index_shopping_cart_orders_on_shipping_address_id"
-    t.index ["user_id"], name: "index_shopping_cart_orders_on_user_id"
+    t.index ["user_type", "user_id"], name: "index_shopping_cart_orders_on_user_type_and_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
