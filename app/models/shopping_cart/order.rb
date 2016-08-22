@@ -26,6 +26,7 @@ module ShoppingCart
       end
     end
 
+    belongs_to :user, polymorphic: true
     has_one :credit_card
     has_one :coupon
     belongs_to :billing_address, class_name: 'Address'

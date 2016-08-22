@@ -1,8 +1,0 @@
-- if @orders.public_send(method).try(:any?)
-  %h2.page-header= t(method)
-  %table.throughout
-    %tr
-      %th= t(:number)
-      %th= t(:completed_at)
-      %th= t(:total)
-    = render partial: 'order_info', collection: @orders.public_send(method), as: :order

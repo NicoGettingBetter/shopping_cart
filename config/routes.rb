@@ -1,4 +1,4 @@
 ShoppingCart::Engine.routes.draw do
   resources :orders
-  root 'orders#edit'
+  root 'orders#index'
 end

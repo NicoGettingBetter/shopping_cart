@@ -1,0 +1,11 @@
+<tr>
+  <td>
+    <%= link_to order.id, order_path(order.id) %>
+  </td>
+  <td>
+    <%= order.completed_date  %>
+  </td>
+  <td>
+    <%= price order.total_price %>
+  </td>
+</tr>

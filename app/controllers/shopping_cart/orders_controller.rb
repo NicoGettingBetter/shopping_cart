@@ -3,19 +3,14 @@ require_dependency "shopping_cart/application_controller"
 module ShoppingCart
   class OrdersController < ApplicationController
     include Rectify::ControllerHelpers
-    before_action :set_order, except: [:new, :create, :index]
+    before_action :set_order, only: [:destroy, :complete]
+    before_action :set_presenter, except: :index
+    before_action :authenticate_user!
+    #load_and_authorize_resource
     helper AddressHelper
 
-    def new
-    end
-
-    def create
-      Order.create(order_params)
-      redirect_to :edit
-    end
-
     def index
-      @orders = ShoppingCart::Order.all
+      present OrdersPresenter.new(current_user)
     end
 
     def show
@@ -114,6 +109,10 @@ module ShoppingCart
 
       def order_items_params
         params[:order][:order_items]
+      end
+
+      def set_presenter
+        present OrderPresenter.new(order: Order.find(params[:id]))
       end
 
       def address_params type
