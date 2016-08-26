@@ -4,5 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :orders, class_name: 'ShoppingCart::Order', as: :user
+  act_as_user
+
+  def current_order
+    orders.in_progress.first ||
+      ShoppingCart::Order.create(user: self)
+  end
 end

@@ -1,0 +1,3 @@
+= link_to 'cart', shopping_cart.edit_order_path(current_order.id)
+- Book.all.each do |book|
+  = link_to "Add #{book.title}", add_book_path(book_id: book.id)
