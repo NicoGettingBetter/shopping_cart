@@ -4,8 +4,8 @@ class CreateShoppingCartOrderItems < ActiveRecord::Migration[5.0]
       t.float :price
       t.integer :quantity
 
-      t.references :order, foreign_key: true
-      t.references :item, foreign_key: true
+      t.references :order
+      #t.references :item, polymorphic: true
 
       t.timestamps
     end

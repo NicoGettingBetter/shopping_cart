@@ -28,11 +28,10 @@ module ShoppingCart
 
     belongs_to :user, polymorphic: true
     has_one :credit_card
-    has_one :coupon
-    belongs_to :billing_address, class_name: 'Address'
-    belongs_to :shipping_address, class_name: 'Address'
+    belongs_to :billing_address, class_name: 'Address', optional: true
+    belongs_to :shipping_address, class_name: 'Address', optional: true
     has_many :order_items, dependent: :destroy
-    belongs_to :delivery
+    belongs_to :delivery, optional: true
 
     [:subtotal,
       :total,

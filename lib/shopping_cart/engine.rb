@@ -3,12 +3,11 @@ module ShoppingCart
     isolate_namespace ShoppingCart
 
     config.generators do |g|
+      g.orm             :active_record
       g.test_framework      :rspec,        fixture: false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
       g.assets false
       g.helper false
-      g.orm             :active_record
-      g.template_engine :erb
     end
 
     # Add a load path for this specific Engine

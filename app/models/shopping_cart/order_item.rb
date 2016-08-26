@@ -1,6 +1,6 @@
 module ShoppingCart
   class OrderItem < ApplicationRecord
-    belongs_to :item
+    belongs_to :item, polymorphic: true
     belongs_to :order
 
     scope :if_exist, -> (order, item) { where(order: order, item: item) }
