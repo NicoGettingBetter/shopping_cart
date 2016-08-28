@@ -49,7 +49,7 @@
         %td
           = link_to t(:empty_cart), order_path(current_order.id), method: :delete, class: 'middle-btn red'
         %td
-          = link_to t(:continue_shopping), shop_path, class: 'middle-btn'
+          = link_to t(:continue_shopping), root_path, class: 'middle-btn'
         %td
           = f.text_field :coupon, value: '', placeholder: t(:coupon_code), class: 'middle'
         %td
