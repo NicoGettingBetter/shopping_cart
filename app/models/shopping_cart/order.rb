@@ -31,6 +31,7 @@ module ShoppingCart
     belongs_to :billing_address, class_name: 'Address', optional: true
     belongs_to :shipping_address, class_name: 'Address', optional: true
     has_many :order_items, dependent: :destroy
+    has_one :coupon
     belongs_to :delivery, optional: true
 
     [:subtotal,
