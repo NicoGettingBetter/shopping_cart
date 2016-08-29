@@ -7,7 +7,6 @@ PATH
       drape
       ffaker
       haml
-      phony
       rails (~> 5.0.0)
       rectify
 
@@ -120,7 +119,6 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
-    phony (2.15.28)
     pkg-config (1.1.7)
     rack (2.0.1)
     rack-test (0.6.3)
