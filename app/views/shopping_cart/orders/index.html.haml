@@ -1,19 +1,19 @@
 %h1.page-header
-  = t(:orders)
+  = t('shopping_cart.orders')
 - if presenter.orders.in_progress.first.try(:order_items).try(:any?)
   %h2.page-header
-    = t(:in_progress)
+    = t('shopping_cart.in_progress')
   %table.throughout
     %tr
       %th
       %th
-        = t(:book)
+        = t('shopping_cart.book')
       %th
-        = t(:price)
+        = t('shopping_cart.price')
       %th
-        = t(:qty)
+        = t('shopping_cart.qty')
       %th
-        = t(:total)
+        = t('shopping_cart.total')
     - presenter.orders.in_progress.first.order_items.each do |order_item|
       %tr
         %td
@@ -36,9 +36,9 @@
   %table.page-header.throughout.right
     %tr
       %td
-        = "#{t(:subtotal)}: #{price(presenter.orders.in_progress.first.try(:subtotal))}"
+        = "#{t('shopping_cart.subtotal')}: #{price(presenter.orders.in_progress.first.try(:subtotal))}"
   %table.center
     %tr
       %td.left
-        = button_to t(:go_to_cart), edit_order_path(presenter.orders.in_progress.first.try(:id)), method: :get
+        = button_to t('shopping_cart.go_to_cart'), edit_order_path(presenter.orders.in_progress.first.try(:id)), method: :get
 = render partial: 'orders', collection: [:in_queue, :in_delivery, :delivered], as: :method

@@ -1,16 +1,16 @@
-= link_to "<< #{t(:back_to_orders)}", orders_path
+= link_to "<< #{t('shopping_cart.back_to_orders')}", orders_path
 %h1.page-header
-  = t(:order)
+  = t('shopping_cart.order')
   %small
     = presenter.order.id
     = presenter.order.state
 %table.underline.center
   %tr
     %th
-    %th= t(:book)
-    %th= t(:price)
-    %th= t(:qty)
-    %th= t(:total)
+    %th= t('shopping_cart.book')
+    %th= t('shopping_cart.price')
+    %th= t('shopping_cart.qty')
+    %th= t('shopping_cart.total')
   - presenter.order.order_items.decorate.each do |order_item|
     %tr
       %td
@@ -32,11 +32,11 @@
 %table.page-header.throughout.right
   %tr
     %td
-      = "#{t(:subtotal)}: #{price(presenter.order.subtotal)}"
+      = "#{t('shopping_cart.subtotal')}: #{price(presenter.order.subtotal)}"
   %tr
     %td
-      = "#{t(:shipping)}: #{price(presenter.order.delivery.price)}"
+      = "#{t('shopping_cart.shipping')}: #{price(presenter.order.delivery.price)}"
 %table.throughout.right
   %tr
     %td
-      = "#{t(:order_total)}: #{price(presenter.order.total)}"
+      = "#{t('shopping_cart.order_total')}: #{price(presenter.order.total)}"

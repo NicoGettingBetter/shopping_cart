@@ -4,9 +4,9 @@
   %table.throughout
     %tr
       %th
-        = t(:number)
+        = t('shopping_cart.number')
       %th
-        = t(:completed_at)
+        = t('shopping_cart.completed_at')
       %th
-        = t(:total)
+        = t('shopping_cart.total')
     = render partial: 'order_info', collection: presenter.orders.public_send(method), as: :order

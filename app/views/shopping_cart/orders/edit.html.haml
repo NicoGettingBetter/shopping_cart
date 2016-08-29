@@ -1,5 +1,5 @@
 - if presenter.order.empty?
-  %h2= t(:you_have_an_empty_cart)
+  %h2= t('shopping_cart.you_have_an_empty_cart')
 - else
   = form_for presenter.order, method: :put do |f|
     - if errors = @form.try(:errors)
@@ -11,10 +11,10 @@
     %table
       %tr
         %th
-        %th= t(:item)
-        %th= t(:price)
-        %th= t(:qty)
-        %th= t(:total)
+        %th= t('shopping_cart.item')
+        %th= t('shopping_cart.price')
+        %th= t('shopping_cart.qty')
+        %th= t('shopping_cart.total')
       - presenter.order.order_items.each do |order_item|
         %tr
           = f.fields_for 'order_items[]', order_item do |ff|
@@ -40,19 +40,19 @@
       - if presenter.order.coupon
         %tr
           %td
-            = "#{t(:sale)}: #{price(presenter.order.sale)}"
+            = "#{t('shopping_cart.sale')}: #{price(presenter.order.sale)}"
       %tr
         %td
-          = "#{t(:subtotal)}: #{price(presenter.order.subtotal)}"
+          = "#{t('shopping_cart.subtotal')}: #{price(presenter.order.subtotal)}"
     %table
       %tr
         %td
-          = link_to t(:empty_cart), order_path(current_order.id), method: :delete, class: 'middle-btn red'
+          = link_to t('shopping_cart.empty_cart'), order_path(current_order.id), method: :delete, class: 'middle-btn red'
         %td
-          = link_to t(:continue_shopping), root_path, class: 'middle-btn'
+          = link_to t('shopping_cart.continue_shopping'), root_path, class: 'middle-btn'
         %td
-          = f.text_field :coupon, value: '', placeholder: t(:coupon_code), class: 'middle'
+          = f.text_field :coupon, value: '', placeholder: t('shopping_cart.coupon_code'), class: 'middle'
         %td
-          = f.submit t(:update), class: 'middle'
+          = f.submit t('shopping_cart.update'), class: 'middle'
         %td
-          = link_to t(:checkout), edit_address_order_path, class: 'middle-btn'
+          = link_to t('shopping_cart.checkout'), edit_address_order_path, class: 'middle-btn'

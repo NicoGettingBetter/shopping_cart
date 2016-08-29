@@ -1,16 +1,16 @@
 %h1.page-header
-  = t(:order)
+  = t('shopping_cart.order')
   %small= presenter.order.id
 %table.throughout
   %tr.left
     %td
-      %h3= t(:shipping_address)
+      %h3= t('shopping_cart.shipping_address')
     %td
-      %h3= t(:billing_address)
+      %h3= t('shopping_cart.billing_address')
     %td
-      %h3= t(:shipments)
+      %h3= t('shopping_cart.shipments')
     %td
-      %h3= t(:payment_information)
+      %h3= t('shopping_cart.payment_information')
   %tr
     %td.top
       = render 'address_info', object: presenter.order.billing_address.decorate
@@ -23,10 +23,10 @@
 %table.underline.center
   %tr
     %th
-    %th= t(:book)
-    %th= t(:price)
-    %th= t(:qty)
-    %th= t(:total)
+    %th= t('shopping_cart.book')
+    %th= t('shopping_cart.price')
+    %th= t('shopping_cart.qty')
+    %th= t('shopping_cart.total')
   - presenter.order_items.each do |order_item|
     %tr
       %td
@@ -48,15 +48,15 @@
 %table.throughout.right.page-header
   %tr
     %td
-      = "#{t(:subtotal)}: #{price(presenter.order.subtotal)}"
+      = "#{t('shopping_cart.subtotal')}: #{price(presenter.order.subtotal)}"
   %tr
     %td
-      = "#{t(:shipping)}: #{price(presenter.order.delivery.price)}"
+      = "#{t('shopping_cart.shipping')}: #{price(presenter.order.delivery.price)}"
 %table.throughout.right
   %tr
     %td
-      = "#{t(:order_total)}: #{price(presenter.order.total)}"
+      = "#{t('shopping_cart.order_total')}: #{price(presenter.order.total)}"
 %table.center
   %tr
     %td.left
-      = button_to t(:go_back_to_store), shop_path, method: :get
+      = button_to t('shopping_cart.go_back_to_store'), shop_path, method: :get

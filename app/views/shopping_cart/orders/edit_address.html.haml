@@ -1,17 +1,17 @@
 .page-header.h3.center
-  = t(:address)
+  = t('shopping_cart.address')
   %small
     = presenter.header_after :address
-%h1.page-header= t(:address)
+%h1.page-header= t('shopping_cart.address')
 = form_for presenter.order, url: address_order_path, method: :put do |f|
   %table.throughout
     %tr
       %th
-        = t(:billing_address)
+        = t('shopping_cart.billing_address')
       %th
-        = t(:shipping_address)
+        = t('shopping_cart.shipping_address')
       %th
-        = t(:order_summary)
+        = t('shopping_cart.order_summary')
     %tr
       %td.top
         = fields_for :billing_address, presenter.billing_address do |billing_address_f|
@@ -23,9 +23,9 @@
         = fields_for :use_billing_address do |use_f|
           .item
             = use_f.check_box :check, checked: presenter.same_address
-            = use_f.label t(:use_billing_address)
+            = use_f.label t('shopping_cart.use_billing_address')
       %td.top
         = render partial: 'order_form', locals: { order: current_order }
     %tr
       %td
-        = f.submit t(:save_and_continue)
+        = f.submit t('shopping_cart.save_and_continue')

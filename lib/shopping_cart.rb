@@ -7,6 +7,7 @@ require "aasm"
 require "haml"
 require "ffaker"
 require "drape"
+require "i18n"
 
 module ShoppingCart
   # Your code goes here...

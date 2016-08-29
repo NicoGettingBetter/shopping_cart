@@ -9,36 +9,37 @@
 %table
   %tr
     %td.right
-      = f.label requires_field t(:first_name)
+      = f.label requires_field t('shopping_cart.first_name')
     %td.left
       = f.text_field :first_name, value: presenter.first_name(type), class: 'middle'
   %tr
     %td.right
-      = f.label requires_field t(:last_name)
+      = f.label requires_field t('shopping_cart.last_name')
     %td.left
       = f.text_field :last_name, value: presenter.last_name(type), class: 'middle'
   %tr
     %td.right
-      = f.label requires_field t(:street)
+      = f.label requires_field t('shopping_cart.street')
     %td.left
       = f.text_field :street, value: presenter.street(type), class: 'middle'
   %tr
     %td.right
-      = f.label requires_field t(:city)
+      = f.label requires_field t('shopping_cart.city')
     %td.left
       = f.text_field :city, value: presenter.city(type), class: 'middle'
   %tr
     %td.right
-      = f.label requires_field t(:country)
+      = f.label requires_field t('shopping_cart.country')
     %td.left
-      = f.select :country_id, countries, { selected: presenter.country_id(type), prompt: t(:please_select_country) }, { class: 'middle' }
+      = f.select :country_id, countries, { selected: presenter.country_id(type),
+        prompt: t('shopping_cart.please_select_country') }, { class: 'middle' }
   %tr
     %td.right
-      = f.label requires_field t(:zip)
+      = f.label requires_field t('shopping_cart.zip')
     %td.left
       = f.number_field :zipcode, value: presenter.zipcode(type), class: 'middle'
   %tr
     %td.right
-      = f.label requires_field t(:phone)
+      = f.label requires_field t('shopping_cart.phone')
     %td.left
       = f.telephone_field :phone, value: presenter.phone(type), class: 'middle'

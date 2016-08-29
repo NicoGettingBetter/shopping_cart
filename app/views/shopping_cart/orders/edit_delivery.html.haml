@@ -1,10 +1,10 @@
 .page-header.h3.center
   %small
     = presenter.header_before :delivery
-  = t(:delivery)
+  = t('shopping_cart.delivery')
   %small
     = presenter.header_after :delivery
-%h1.page-header= t(:delivery)
+%h1.page-header= t('shopping_cart.delivery')
 - if @form
   - errors = @form.delivery.errors
   #error_explanation.middle
@@ -18,7 +18,7 @@
       %th
       %th
       %th.left
-        = t(:order_summary)
+        = t('shopping_cart.order_summary')
     %tr
       %td
         - presenter.deliveries.sort.each do |delivery|
@@ -30,4 +30,4 @@
         = render partial: 'order_form', locals: { order: current_user.current_order }
     %tr
       %td
-        = f.submit t(:save_and_continue)
+        = f.submit t('shopping_cart.save_and_continue')
