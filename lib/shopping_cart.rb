@@ -6,7 +6,6 @@ require "rectify"
 require "aasm"
 require "haml"
 require "ffaker"
-require "phony"
 require "drape"
 
 module ShoppingCart
