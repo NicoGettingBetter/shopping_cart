@@ -1,6 +1,6 @@
 module ShoppingCart
   class OrderPresenter < Rectify::Presenter
-    include Rails.application.routes.url_helpers
+    include ShoppingCart::Engine.routes.url_helpers
 
     attribute :order, Order
     attribute :billing_address, AddressForm
@@ -14,8 +14,7 @@ module ShoppingCart
     def initialize *attrs
       super *attrs
       ['billing', 'shipping'].each do |type|
-        send("#{type}_address=", AddressForm.from_model(order.send("#{type}_address") ||
-          order.user.send("default_#{type}_address")))
+        send("#{type}_address=", AddressForm.from_model(order.send("#{type}_address")))
       end
       @routes = { address: edit_address_order_path(id: order.id),
         payment: edit_payment_order_path(id: order.id),
