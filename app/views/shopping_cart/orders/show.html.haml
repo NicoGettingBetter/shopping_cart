@@ -7,22 +7,14 @@
 %table.underline.center
   %tr
     %th
-    %th= t('shopping_cart.book')
+    %th= t('shopping_cart.item')
     %th= t('shopping_cart.price')
     %th= t('shopping_cart.qty')
     %th= t('shopping_cart.total')
   - presenter.order.order_items.decorate.each do |order_item|
     %tr
       %td
-        = image_tag order_item.book.image, class: 'small'
-      %td
-        %table.left
-          %tr
-            %td
-              %h2= order_item.book.title
-          %tr
-            %td
-              = order_item.book.short_description
+        = render 'item_info', item: order_item.item
       %td
         = price(order_item.price)
       %td

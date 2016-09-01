@@ -22,8 +22,8 @@ module ShoppingCart
       def set_or_update_order_items
         order_items.keys.each do |id|
           order_item = order_item id
-          if order_item_params(id)['quantity'].to_i > order_item.book.instock
-            order_item.update(quantity: order_item.book.instock)
+          if order_item_params(id)['quantity'].to_i > order_item.item.instock
+            order_item.update(quantity: order_item.item.instock)
           elsif order_item_params(id)['quantity'].to_i < 1
             order_item.update(quantity: 1)
           else
@@ -97,8 +97,8 @@ module ShoppingCart
       def set_or_update_order
         order = current_order
         order.order_items.each do |order_item|
-          order_item.quantity = order_item.book.instock if order_item.book.instock < order_item.quantity
-          order_item.book.sold_books order_item.quantity
+          order_item.quantity = order_item.item.instock if order_item.item.instock < order_item.quantity
+          order_item.item.instock -= order_item.quantity
         end
         order.place if order.may_place?
         order.update(total_price: order.total, completed_date: Time.now)

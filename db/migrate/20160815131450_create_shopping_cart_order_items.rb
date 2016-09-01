@@ -5,7 +5,7 @@ class CreateShoppingCartOrderItems < ActiveRecord::Migration[5.0]
       t.integer :quantity
 
       t.references :order
-      #t.references :item, polymorphic: true
+      t.references :item, polymorphic: true
 
       t.timestamps
     end

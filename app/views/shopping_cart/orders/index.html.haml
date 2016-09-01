@@ -7,7 +7,7 @@
     %tr
       %th
       %th
-        = t('shopping_cart.book')
+        = t('shopping_cart.item')
       %th
         = t('shopping_cart.price')
       %th
@@ -17,16 +17,7 @@
     - presenter.orders.in_progress.first.order_items.each do |order_item|
       %tr
         %td
-          = image_tag order_item.book.image, class: 'small'
-        %td
-          %table.left
-            %tr
-              %td
-                %h2
-                  = order_item.book.title
-            %tr
-              %td
-                = order_item.book.short_description
+          = render 'item_info', item: order_item.item
         %td
           = price(order_item.price)
         %td

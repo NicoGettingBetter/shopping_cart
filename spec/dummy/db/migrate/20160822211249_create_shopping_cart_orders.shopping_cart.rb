@@ -7,10 +7,9 @@ class CreateShoppingCartOrders < ActiveRecord::Migration[5.0]
       t.datetime :completed_date
 
       t.references :user, polymorphic: true
-      t.references :billing_address, foreign_key: true
-      t.references :shipping_address, foreign_key: true
-      t.references :coupon, foreign_key: true
-      t.references :delivery, foreign_key: true
+      t.references :billing_address
+      t.references :shipping_address
+      t.references :delivery
 
       t.timestamps
     end

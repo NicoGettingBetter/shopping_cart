@@ -6,8 +6,6 @@ class CreateShoppingCartDeliveries < ActiveRecord::Migration[5.0]
       t.string :delivery_method
       t.float :price
 
-      t.references :order
-
       t.timestamps
     end
   end

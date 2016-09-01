@@ -8,8 +8,8 @@ class CreateShoppingCartAddresses < ActiveRecord::Migration[5.0]
       t.integer :zipcode
       t.string :city
       t.string :phone
-      
-      t.references :country, foreign_key: true
+
+      t.references :country
 
       t.timestamps
     end

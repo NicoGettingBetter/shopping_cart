@@ -10,7 +10,6 @@
             %li= msg
     %table
       %tr
-        %th
         %th= t('shopping_cart.item')
         %th= t('shopping_cart.price')
         %th= t('shopping_cart.qty')
@@ -19,15 +18,7 @@
         %tr
           = f.fields_for 'order_items[]', order_item do |ff|
             %td
-              = image_tag order_item.item.image, class: 'small'
-            %td
-              %table.left
-                %tr
-                  %td
-                    %h2= order_item.item.title
-                %tr
-                  %td
-                    = order_item.item.short_description
+              = render 'item_info', item: order_item.item
             %td
               = price(order_item.price)
             %td

@@ -43,11 +43,12 @@ ActiveRecord::Schema.define(version: 20160828115320) do
   end
 
   create_table "shopping_cart_coupons", force: :cascade do |t|
-    t.string   :code
-    t.integer  :sale
-    t.integer  :order_id
+    t.string   "code"
+    t.integer  "sale"
+    t.integer  "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_shopping_cart_coupons_on_order_id"
   end
 
   create_table "shopping_cart_credit_cards", force: :cascade do |t|
@@ -65,10 +66,8 @@ ActiveRecord::Schema.define(version: 20160828115320) do
     t.string   "company"
     t.string   "delivery_method"
     t.float    "price"
-    t.integer  "order_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["order_id"], name: "index_shopping_cart_deliveries_on_order_id"
   end
 
   create_table "shopping_cart_order_items", force: :cascade do |t|
@@ -79,7 +78,7 @@ ActiveRecord::Schema.define(version: 20160828115320) do
     t.integer  "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_shopping_cart_order_items_on_item_id"
+    t.index ["item_type", "item_id"], name: "index_shopping_cart_order_items_on_item_type_and_item_id"
     t.index ["order_id"], name: "index_shopping_cart_order_items_on_order_id"
   end
 
@@ -91,12 +90,10 @@ ActiveRecord::Schema.define(version: 20160828115320) do
     t.integer  "user_id"
     t.integer  "billing_address_id"
     t.integer  "shipping_address_id"
-    t.integer  "coupon_id"
     t.integer  "delivery_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["billing_address_id"], name: "index_shopping_cart_orders_on_billing_address_id"
-    t.index ["coupon_id"], name: "index_shopping_cart_orders_on_coupon_id"
     t.index ["delivery_id"], name: "index_shopping_cart_orders_on_delivery_id"
     t.index ["shipping_address_id"], name: "index_shopping_cart_orders_on_shipping_address_id"
     t.index ["user_type", "user_id"], name: "index_shopping_cart_orders_on_user_type_and_user_id"

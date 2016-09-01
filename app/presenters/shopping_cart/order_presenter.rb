@@ -24,13 +24,7 @@ module ShoppingCart
       @states = [ :address, :delivery, :payment, :confirm, :complete]
     end
 
-    [:first_name, :last_name].each do |name|
-      define_method name do |type|
-        send(type).send(name) || order.user.send(name)
-      end
-    end
-
-    [:street, :city, :zipcode, :phone, :country_id].each do |name|
+    [:first_name, :last_name, :street, :city, :zipcode, :phone, :country_id].each do |name|
       define_method name do |type|
         send(type).send(name)
       end
