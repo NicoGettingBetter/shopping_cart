@@ -1,3 +1,6 @@
 = link_to 'cart', shopping_cart.edit_order_path(current_order.id)
+%br
+= link_to 'sign out', destroy_user_session_path, method: :delete
+%br
 - Book.all.each do |book|
   = link_to "Add #{book.title}", add_book_path(book_id: book.id)

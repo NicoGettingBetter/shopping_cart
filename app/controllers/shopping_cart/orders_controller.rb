@@ -6,7 +6,7 @@ module ShoppingCart
     before_action :set_order, only: [:destroy, :complete]
     before_action :set_presenter, except: :index
     before_action :authenticate_user!
-    #load_and_authorize_resource
+    load_and_authorize_resource
     helper AddressHelper
 
     def index

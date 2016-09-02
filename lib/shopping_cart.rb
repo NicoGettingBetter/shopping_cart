@@ -8,6 +8,7 @@ require "haml"
 require "ffaker"
 require "drape"
 require "i18n"
+require "cancancan"
 
 module ShoppingCart
   # Your code goes here...

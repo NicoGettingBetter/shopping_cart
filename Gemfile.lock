@@ -3,6 +3,7 @@ PATH
   specs:
     shopping_cart (0.1.0)
       aasm
+      cancancan
       devise
       drape
       ffaker
@@ -66,6 +67,7 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
+    cancancan (1.12.0)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
