@@ -1,3 +1,5 @@
+require "jquery-rails"
+require "turbolinks"
 require "shopping_cart/engine"
 require "shopping_cart/act_as_user"
 require "shopping_cart/act_as_item"
