@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :shopping_cart_country, class: 'ShoppingCart::Country' do
-    name "MyString"
+    name FFaker::Address.country
   end
 end
