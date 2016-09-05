@@ -9,7 +9,7 @@ class HomeController < ApplicationController
                                     order_id: current_order.id,
                                     quantity: 1,
                                     price: book.price)
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
   private

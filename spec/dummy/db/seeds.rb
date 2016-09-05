@@ -128,11 +128,12 @@ books = [
       instock: rand(100..1000)) }
   end.reduce(:merge)
 
-#[{code: '123456'},
-# {code: '654321'},
-# {code: '321654'}].each do |coupon|
-#  Coupon.create(code: coupon[:code],
-#                sale: rand(3..15))
+[{code: '123456'},
+  {code: '654321'},
+  {code: '321654'}].each do |coupon|
+    ShoppingCart::Coupon.create(code: coupon[:code],
+                  sale: rand(3..15))
+  end
 
 #User.create([{first_name: 'Test', last_name: 'Test', email: 'test@test.test', password: '123456' },
 #  {first_name: 'Admin', last_name: 'Admin', email: 'admin@admin.admin', password: '123456', admin: true },

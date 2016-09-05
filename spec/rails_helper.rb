@@ -11,10 +11,25 @@ require 'rails-controller-testing'
 require 'shoulda-matchers'
 require 'database_cleaner'
 require 'byebug'
+require 'support/database_cleaner'
+require 'support/test_helper'
+require 'support/capybara'
+require 'capybara/rspec'
+require 'capybara/rails'
+require 'capybara/webkit/matchers'
+require 'capybara-webkit'
+
+Capybara.javascript_driver = :webkit
+Capybara.default_driver = :webkit
+Capybara.run_server = true
+Capybara.server_port = 7000
+Capybara.app_host = "http://localhost:#{Capybara.server_port}"
 
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true
 
@@ -30,19 +45,6 @@ RSpec.configure do |config|
     config.include ::Rails::Controller::Testing::Integration, :type => type
   end
 
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
       with.test_framework :rspec
@@ -54,4 +56,11 @@ RSpec.configure do |config|
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
+
+  config.include(Capybara::Webkit::RspecMatchers, type: :feature)
+  config.include RSpec::Rails::RequestExampleGroup, type: :feature
+  config.include Capybara::DSL, :type => :controller
+  config.include(TestHelper)
+
+  config.shared_context_metadata_behavior = :apply_to_host_groups
 end
