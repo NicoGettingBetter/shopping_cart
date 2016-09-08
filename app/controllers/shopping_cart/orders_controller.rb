@@ -8,6 +8,7 @@ module ShoppingCart
     before_action :authenticate_user!
     load_and_authorize_resource
     helper AddressHelper
+    helper CreditCardHelper
 
     def index
       present OrdersPresenter.new(current_user)
