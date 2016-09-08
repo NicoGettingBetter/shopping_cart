@@ -4,11 +4,11 @@ module ShoppingCart
 
     def initialize(user)
       if user
-        can :manage, [ShoppingCart::Order, ShoppingCart::OrderItem,
-          ShoppingCart::User], user_id: user.id
+        can :manage, ShoppingCart::Order, user_id: user.id
+        can :manage, ShoppingCart::OrderItem, order_id: user.current_order.id
         if user.admin?
           can :manage, [ShoppingCart::Order, ShoppingCart::Delivery,
-            ShoppingCart::Coupon, User, ShoppingCart::OrderItem]
+            ShoppingCart::Coupon, ShoppingCart::OrderItem]
         end
       end
     end
