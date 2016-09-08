@@ -2,6 +2,7 @@ require_dependency "shopping_cart/application_controller"
 
 module ShoppingCart
   class OrderItemsController < ApplicationController
+    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :set_order_item, only: [:destroy]
 
