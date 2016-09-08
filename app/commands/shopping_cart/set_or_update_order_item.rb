@@ -29,7 +29,7 @@ module ShoppingCart
       end
 
       def attributes
-        @form.attributes
+        @form.attributes.merge(price: price)
       end
 
       def item_id
@@ -37,7 +37,11 @@ module ShoppingCart
       end
 
       def item_instock
-        Item.find(item_id).instock
+        eval(order_item.item_type).find(item_id).instock
+      end
+
+      def price
+        eval(@form.item_type).find_by(id: item_id).price
       end
   end
 end

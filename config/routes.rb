@@ -12,6 +12,6 @@ ShoppingCart::Engine.routes.draw do
       put 'confirm', action: 'order_confirm', as: 'confirm'
     end
   end
-  resources :order_items, only: :destroy
+  resources :order_items, only: [:create, :update, :destroy]
   root 'orders#index'
 end

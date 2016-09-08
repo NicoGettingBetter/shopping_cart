@@ -1,9 +1,9 @@
 module ShoppingCart
   class OrderItemForm < Rectify::Form
-    attribute :price, Float
     attribute :quantity, Integer
     attribute :order_id, Integer
     attribute :item_id, Integer
+    attribute :item_type, String
     attribute :id, Integer
 
     validates :quantity,
@@ -12,9 +12,5 @@ module ShoppingCart
               presence: true
     validates :quantity,
               numericality: { grater_then: 0 }
-
-    def set_price
-      @price = Item.find(item_id).price
-    end
   end
 end
