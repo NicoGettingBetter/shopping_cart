@@ -6,7 +6,7 @@ module ShoppingCart
       if user
         can :manage, ShoppingCart::Order, user_id: user.id
         can :manage, ShoppingCart::OrderItem, order_id: user.current_order.id
-        if user.admin?
+        if user.try :admin?
           can :manage, [ShoppingCart::Order, ShoppingCart::Delivery,
             ShoppingCart::Coupon, ShoppingCart::OrderItem]
         end
