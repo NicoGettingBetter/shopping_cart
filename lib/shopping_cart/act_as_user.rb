@@ -6,6 +6,10 @@ module ShoppingCart
       def act_as_user
         class_eval do
           has_many :orders, class_name: 'ShoppingCart::Order', as: :user
+          delegate :in_progress, to: :orders, prefix: true
+          delegate :in_queue, to: :orders, prefix: true
+          delegate :in_delivery, to: :orders, prefix: true
+          delegate :delivered, to: :orders, prefix: true
         end
       end
     end

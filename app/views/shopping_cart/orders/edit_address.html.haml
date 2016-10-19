@@ -13,10 +13,10 @@
       %th
         = t('shopping_cart.order_summary')
     %tr
-      %td.top
+      %td.bottom
         = fields_for :billing_address, presenter.billing_address do |billing_address_f|
           = render partial: 'address_form', locals: { f: billing_address_f, type: :billing_address }
-      %td.top
+      %td.bottom
         .shipping_address
           = fields_for :shipping_address, presenter.shipping_address do |shipping_address_f|
             = render partial: 'address_form', locals: { f: shipping_address_f, type: :shipping_address }
