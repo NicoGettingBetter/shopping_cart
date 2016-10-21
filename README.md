@@ -117,7 +117,7 @@ end
 
 1. Generate `shopping_cart` views:
   ```bash
-  rails g shopping_cart:cart_views
+    rails g shopping_cart:cart_views
   ```
 2. Change file `views/shopping_cart/orders/_item_info.html.haml`. Order item object is `item`.
 
@@ -126,97 +126,97 @@ end
 #### Create model
 1. Generate `shopping_cart` models:
   ```bash
-  rails g shopping_cart:cart_models
+    rails g shopping_cart:cart_models
   ```
 2. Generate model for your step:
   ```bash
-  rails g model ShoppingCart::MyStep
+    rails g model ShoppingCart::MyStep
   ```
 3. Add reference to order to your step:
   ```bash
-  rails g migration AddMyStepReferenceToOrder
+    rails g migration AddMyStepReferenceToOrder
   ```
   In migration:
   ```ruby
-  def change
-    add_reference :shopping_cart_orders, :my_step, index: true
-  end
+    def change
+      add_reference :shopping_cart_orders, :my_step, index: true
+    end
   ```
 4. Add reference to order model:
   ```ruby
-  belongs_to :my_step, class_name: 'ShoppingCart::MyStep'
+    belongs_to :my_step, class_name: 'ShoppingCart::MyStep'
   ```
 
 #### Change order presenter
 1. Generate 'shopping_cart' presenters:
   ```bash
-  rails g shopping_cart:cart_presenters
+    rails g shopping_cart:cart_presenters
   ```
 2. Add your step to `@states` in `initialize` in `presenters/shopping_cart/order_presenter.rb`
   ```ruby
-  @states = [ :address, :delivery, :payment, :my_step, :confirm, :complete]
+    @states = [ :address, :delivery, :payment, :my_step, :confirm, :complete]
   ```
 
 #### Create form for your step
 1. Generate 'shopping_cart' forms:
   ```bash
-  rails g shopping_cart:cart_forms
+    rails g shopping_cart:cart_forms
   ```
 2. Create file `my_step_form.rb` in `app/forms/shopping_cart`:
   ```ruby
-  module ShoppingCart
-    class MyStepForm < Rectify::Form
-      # your model validations
+    module ShoppingCart
+      class MyStepForm < Rectify::Form
+        # your model validations
+      end
     end
-  end
   ```
 3. Add attribute to `OrderForm`:
   ```ruby
-  attribute :my_step, MyStepForm
+    attribute :my_step, MyStepForm
   ```
 4. Change valid? method in `OrderForm`:
   ```ruby
-  def valid?
-    output = super
-    if shipping_address
-      shipping_address.valid?
-      billing_address.valid? &&
-        shipping_address.valid? &&
+    def valid?
+      output = super
+      if shipping_address
+        shipping_address.valid?
+        billing_address.valid? &&
+          shipping_address.valid? &&
+          errors.empty? && output
+      elsif billing_address
+        billing_address.valid? &&
+          errors.empty? && output
+      elsif credit_card
+        credit_card.valid? &&
+          errors.empty? && output
+      elsif delivery
+        delivery.valid? &&
+          errors.empty? && output
+      elsif my_step
+        my_step.valid? &&
+          errors.empty? && output
+      else
         errors.empty? && output
-    elsif billing_address
-      billing_address.valid? &&
-        errors.empty? && output
-    elsif credit_card
-      credit_card.valid? &&
-        errors.empty? && output
-    elsif delivery
-      delivery.valid? &&
-        errors.empty? && output
-    elsif my_step
-      my_step.valid? &&
-        errors.empty? && output
-    else
-      errors.empty? && output
+      end
     end
-  end
   ```
 
 #### Create command for your step
 1. Generate `shopping_cart` commands
   ```ruby
-  rails g shopping_cart:cart_commands
+    rails g shopping_cart:cart_commands
   ```
 2. Create new method `set_or_update_my_step` in `update_order.rb`:
   ```ruby
-  def set_or_update_my_step
-    # update reference to step in order
-  end
+    def set_or_update_my_step
+      # update reference to step in order
+    end
   ```
 
 #### Change order controller
 1. Generate `shopping_cart` controllers:
   ```bash
-  rails g shopping_cart:cart_controllers
+    rails g shopping_cart:cart_controllers
   ```
 2. Change previous step (redirect to your state on ok) and create new one. In `edit_my_state` add new route to presenter
   ```ruby
@@ -246,50 +246,50 @@ end
 
 3. Add strong parameters for your step:
   ```ruby
-  def my_step_params
-    # getting params
-  end
+    def my_step_params
+      # getting params
+    end
   ```
 
 #### Create view for your step
 1. Create folder `views/shopping_cart/orders`.
 2. Create file `edit_my_step`:
   ```ruby
-  .page-header.h3.center
-    %small= presenter.header_before :my_step
-    My step
-    %small= presenter.header_after :my_step
-  %h2.page-header My step
-  = form_for presenter.order, url: main_app.my_step_order_path, method: :put do |f|
-    - # form for your step
-    = f.submit t('shopping_cart.save_and_continue')
+    .page-header.h3.center
+      %small= presenter.header_before :my_step
+      My step
+      %small= presenter.header_after :my_step
+    %h2.page-header My step
+    = form_for presenter.order, url: main_app.my_step_order_path, method: :put do |f|
+      - # form for your step
+      = f.submit t('shopping_cart.save_and_continue')
   ```
 
 #### Change service for checkout links
 1. Generate `shopping_cart` services:
   ```bash
-  rails g shopping_cart:services
+    rails g shopping_cart:services
   ```
 2. Add to `linkable?` condition for linkable your step and change condition of linkable for next step in `checkout_link.rb`:
   ```ruby
-  def linkable? state
-    case state
-    when :address
-      true
-    when :delivery
-      @order.billing_address && @order.shipping_address
-    when :payment
-      @order.delivery
-    when :my_step
-      @order.credit_card
-    when :confirm
-      @order.my_step
-    when :complete
-      false
-    else
-      raise 'No state error'
+    def linkable? state
+      case state
+      when :address
+        true
+      when :delivery
+        @order.billing_address && @order.shipping_address
+      when :payment
+        @order.delivery
+      when :my_step
+        @order.credit_card
+      when :confirm
+        @order.my_step
+      when :complete
+        false
+      else
+        raise 'No state error'
+      end
     end
-  end
   ```
 
 ## License
