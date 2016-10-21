@@ -271,6 +271,7 @@ end
     rails g shopping_cart:services
   ```
 2. Add to `linkable?` condition for linkable your step and change condition of linkable for next step in `checkout_link.rb`:
+
   ```ruby
     def linkable? state
       case state
