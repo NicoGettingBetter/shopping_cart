@@ -48,7 +48,8 @@ feature 'edit cart' do
   scenario 'delete order item' do
     click_link(I18n.t('shopping_cart.cart'))
     click_link 'x'
-    expect(page).not_to have_content(@book.title)
+    sleep 1
+    expect(@user.current_order.order_items).not_to be_any
     add_book @book
   end
 
@@ -89,7 +90,8 @@ feature 'checkout' do
       fill_in_billing_address
       check :use_billing_address_check
       click_button I18n.t('shopping_cart.save_and_continue')
-      expect(page).to have_content(@delivery.company)
+      sleep 1
+      expect(@user.current_order.billing_address).not_to be_nil
     end
 
     scenario 'with wrong fields' do
@@ -105,7 +107,8 @@ feature 'checkout' do
 
     scenario 'set delivery' do
       set_delivery
-      expect(page).to have_content(I18n.t('shopping_cart.credit_card'))
+      sleep 1
+      expect(@user.current_order.delivery).not_to be_nil
     end
 
     scenario 'was not chosen' do
@@ -122,7 +125,8 @@ feature 'checkout' do
 
     scenario 'set payment' do
       set_payment
-      expect(page).to have_selector("input[type=submit][value='#{I18n.t('shopping_cart.place_order')}']")
+      sleep 1
+      expect(@user.current_order.credit_card).not_to be_nil
     end
 
     scenario 'with wrong fields' do
@@ -139,8 +143,10 @@ feature 'checkout' do
     end
 
     scenario 'place order' do
+      click_button I18n.t('shopping_cart.save_and_continue')
       click_button I18n.t('shopping_cart.place_order')
-      expect(page).to have_selector("input[type=submit][value='#{I18n.t('shopping_cart.go_back_to_store')}']")
+      sleep 1
+      expect(@user.current_order.order_items).not_to be_any
       add_book @book
     end
   end

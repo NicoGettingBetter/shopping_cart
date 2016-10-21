@@ -6,6 +6,11 @@ feature 'add book to cart' do
     @book = FactoryGirl.create(:book)
   end
 
+  after :all do
+    @book.delete
+    @user.delete
+  end
+
   scenario 'add book' do
     sign_in @user
     add_book @book
