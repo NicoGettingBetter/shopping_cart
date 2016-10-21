@@ -116,6 +116,7 @@ end
 ### Change view of order item
 
 1. Generate `shopping_cart` views:
+
   ```bash
     rails g shopping_cart:cart_views
   ```
@@ -125,44 +126,53 @@ end
 
 #### Create model
 1. Generate `shopping_cart` models:
+
   ```bash
     rails g shopping_cart:cart_models
   ```
 2. Generate model for your step:
+
   ```bash
     rails g model ShoppingCart::MyStep
   ```
 3. Add reference to order to your step:
+
   ```bash
     rails g migration AddMyStepReferenceToOrder
   ```
   In migration:
+
   ```ruby
     def change
       add_reference :shopping_cart_orders, :my_step, index: true
     end
   ```
 4. Add reference to order model:
+
   ```ruby
     belongs_to :my_step, class_name: 'ShoppingCart::MyStep'
   ```
 
 #### Change order presenter
 1. Generate 'shopping_cart' presenters:
+
   ```bash
     rails g shopping_cart:cart_presenters
   ```
-2. Add your step to `@states` in `initialize` in `presenters/shopping_cart/order_presenter.rb`
+2. Add your step to `@states` in `initialize` in `presenters/shopping_cart/order_presenter.rb`:
+
   ```ruby
     @states = [ :address, :delivery, :payment, :my_step, :confirm, :complete]
   ```
 
 #### Create form for your step
 1. Generate 'shopping_cart' forms:
+
   ```bash
     rails g shopping_cart:cart_forms
   ```
 2. Create file `my_step_form.rb` in `app/forms/shopping_cart`:
+
   ```ruby
     module ShoppingCart
       class MyStepForm < Rectify::Form
@@ -171,10 +181,12 @@ end
     end
   ```
 3. Add attribute to `OrderForm`:
+
   ```ruby
     attribute :my_step, MyStepForm
   ```
 4. Change valid? method in `OrderForm`:
+
   ```ruby
     def valid?
       output = super
@@ -202,11 +214,13 @@ end
   ```
 
 #### Create command for your step
-1. Generate `shopping_cart` commands
+1. Generate `shopping_cart` commands:
+
   ```ruby
     rails g shopping_cart:cart_commands
   ```
 2. Create new method `set_or_update_my_step` in `update_order.rb`:
+
   ```ruby
     def set_or_update_my_step
       # update reference to step in order
@@ -215,10 +229,12 @@ end
 
 #### Change order controller
 1. Generate `shopping_cart` controllers:
+
   ```bash
     rails g shopping_cart:cart_controllers
   ```
-2. Change previous step (redirect to your state on ok) and create new one. In `edit_my_state` add new route to presenter
+2. Change previous step (redirect to your state on ok) and create new one. In `edit_my_state` add new route to presenter:
+
   ```ruby
     def order_payment
       @form = OrderForm.new(credit_card: CreditCardForm.new(credit_card_params))
@@ -245,6 +261,7 @@ end
   ```
 
 3. Add strong parameters for your step:
+
   ```ruby
     def my_step_params
       # getting params
@@ -254,6 +271,7 @@ end
 #### Create view for your step
 1. Create folder `views/shopping_cart/orders`.
 2. Create file `edit_my_step`:
+
   ```ruby
     .page-header.h3.center
       %small= presenter.header_before :my_step
@@ -267,6 +285,7 @@ end
 
 #### Change service for checkout links
 1. Generate `shopping_cart` services:
+
   ```bash
     rails g shopping_cart:services
   ```
