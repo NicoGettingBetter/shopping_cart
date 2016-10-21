@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828115320) do
+ActiveRecord::Schema.define(version: 20161020184721) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -70,6 +70,11 @@ ActiveRecord::Schema.define(version: 20160828115320) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "shopping_cart_my_steps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shopping_cart_order_items", force: :cascade do |t|
     t.float    "price"
     t.integer  "quantity"
@@ -93,8 +98,10 @@ ActiveRecord::Schema.define(version: 20160828115320) do
     t.integer  "delivery_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "my_step_id"
     t.index ["billing_address_id"], name: "index_shopping_cart_orders_on_billing_address_id"
     t.index ["delivery_id"], name: "index_shopping_cart_orders_on_delivery_id"
+    t.index ["my_step_id"], name: "index_shopping_cart_orders_on_my_step_id"
     t.index ["shipping_address_id"], name: "index_shopping_cart_orders_on_shipping_address_id"
     t.index ["user_type", "user_id"], name: "index_shopping_cart_orders_on_user_type_and_user_id"
   end

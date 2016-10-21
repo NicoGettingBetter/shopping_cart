@@ -2,7 +2,7 @@ Description:
     Explain the generator
 
 Example:
-    rails generate shopping_cart:cart_commands
+    rails generate cart_controllers Thing
 
     This will create:
         what/will/it/create

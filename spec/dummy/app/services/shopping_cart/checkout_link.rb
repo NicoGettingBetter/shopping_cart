@@ -14,6 +14,8 @@ module ShoppingCart
         @order.billing_address && @order.shipping_address
       when :payment
         @order.delivery
+      when :my_step
+        false
       when :confirm
         @order.credit_card
       when :complete

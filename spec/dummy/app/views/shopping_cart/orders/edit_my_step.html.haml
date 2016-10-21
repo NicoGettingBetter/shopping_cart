@@ -1,0 +1,8 @@
+.page-header.h3.center
+  %small= presenter.header_before :my_step
+  My step
+  %small= presenter.header_after :my_step
+%h2.page-header My step
+= form_for presenter.order, url: main_app.my_step_order_path, method: :put do |f|
+  = f.text_field :total_price
+  = f.submit t('shopping_cart.save_and_continue')

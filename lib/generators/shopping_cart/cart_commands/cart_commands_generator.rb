@@ -1,7 +1,7 @@
-class ShoppingCart::CartCommandsGenerator < Rails::Generators::NamedBase
-  source_root File.expand_path('../templates', __FILE__)
-  
-  def generate_commands
+class ShoppingCart::CartCommandsGenerator < Rails::Generators::Base
+  source_root File.expand_path('../../../../../app/', __FILE__)
+
+  def copy_commands
     directory 'commands/', 'app/commands/'
   end
 end

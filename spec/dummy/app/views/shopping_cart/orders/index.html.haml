@@ -1,0 +1,34 @@
+%h1.page-header
+  = t('shopping_cart.orders')
+- if presenter.orders.in_progress.first.try(:order_items).try(:any?)
+  %h2.page-header
+    = t('shopping_cart.in_progress')
+  %table.throughout
+    %tr
+      %th
+        = t('shopping_cart.item')
+      %th
+        = t('shopping_cart.price')
+      %th
+        = t('shopping_cart.qty')
+      %th
+        = t('shopping_cart.total')
+    - presenter.orders.in_progress.first.order_items.each do |order_item|
+      %tr
+        %td
+          = render 'item_info', item: order_item.item
+        %td
+          = price(order_item.price)
+        %td
+          = order_item.quantity
+        %td
+          = price(order_item.total)
+  %table.page-header.throughout.right
+    %tr
+      %td
+        = "#{t('shopping_cart.subtotal')}: #{price(presenter.orders.in_progress.first.try(:subtotal))}"
+  %table.center
+    %tr
+      %td.left
+        = button_to t('shopping_cart.go_to_cart'), edit_order_path(presenter.orders.in_progress.first.try(:id)), method: :get
+= render partial: 'orders', collection: [:in_queue, :in_delivery, :delivered], as: :method

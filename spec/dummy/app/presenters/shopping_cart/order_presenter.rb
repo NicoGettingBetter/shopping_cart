@@ -21,7 +21,7 @@ module ShoppingCart
         delivery: edit_delivery_order_path(id: order.id),
         confirm: edit_confirm_order_path(id: order.id),
         complete: complete_order_path(id: order.id) }
-      @states = [ :address, :delivery, :payment, :confirm, :complete]
+      @states = [ :address, :delivery, :payment, :my_step, :confirm, :complete]
     end
 
     [:first_name, :last_name, :street, :city, :zipcode, :phone, :country_id].each do |name|
