@@ -1,0 +1,19 @@
+.page-header.h3.center
+  %small= presenter.header_before :payment
+  = t('shopping_cart.payment')
+  %small= presenter.header_after :payment
+%h2.page-header= t('shopping_cart.credit_card')
+= form_for presenter.order, url: payment_order_path, method: :put do |ff|
+  %table.throughout
+    %tr
+      %th
+      %th.left
+        = t('shopping_cart.order_summary')
+    %tr
+      %td
+        = render 'credit_card_form'
+      %td.top.right
+        = render 'order_form'
+    %tr
+      %td
+        = ff.submit t('shopping_cart.save_and_continue')

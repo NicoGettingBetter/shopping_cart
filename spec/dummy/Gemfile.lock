@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    countries (1.2.5)
+      currencies (~> 0.4.2)
+      i18n_data (~> 0.7.0)
+    currencies (0.4.2)
+    i18n_data (0.7.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  countries
+
+BUNDLED WITH
+   1.12.5

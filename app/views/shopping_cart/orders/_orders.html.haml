@@ -1,0 +1,12 @@
+- if presenter.orders.public_send(method).try(:any?)
+  %h2.page-header
+    = t(method)
+  %table.throughout
+    %tr
+      %th
+        = t('shopping_cart.number')
+      %th
+        = t('shopping_cart.completed_at')
+      %th
+        = t('shopping_cart.total')
+    = render partial: 'order_info', collection: presenter.orders.public_send(method), as: :order
