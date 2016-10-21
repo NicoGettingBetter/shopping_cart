@@ -7,6 +7,7 @@ module ShoppingCart
     attribute :credit_card, CreditCardForm
     attribute :coupon, Coupon
     attribute :delivery, DeliveryForm
+    attribute :my_step, MyStepForm
 
     validates_length_of :coupon, is: 6, allow_blank: true
     validates :coupon,
@@ -32,6 +33,9 @@ module ShoppingCart
           errors.empty? && output
       elsif delivery
         delivery.valid? &&
+          errors.empty? && output
+      elsif my_step
+        my_step.valid? &&
           errors.empty? && output
       else
         errors.empty? && output
